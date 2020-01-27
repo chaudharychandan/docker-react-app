@@ -1,16 +1,18 @@
 os: linux
 language: python
-python:
-  - "3.8"
 
 services:
   - docker
 
+before_install:
+  - pyenv global 3.7.1
+  - pip install -U pip
+  - pip install awscli
+
 install:
-  - pip3 install --upgrade --user awscli
+  - export PATH=$HOME/.local/bin:$PATH
 
 before_script:
-  - export PATH=$HOME/.local/bin:$PATH
   - bash .travis/setup.sh
 
 script:
