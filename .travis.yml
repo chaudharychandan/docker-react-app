@@ -10,9 +10,10 @@ before_install:
   - pip install awscli
 
 install:
-  - export PATH=$HOME/.local/bin:$PATH
 
 before_script:
+  - chmod a+x .travis/*.sh
+  - export PATH=$HOME/.local/bin:$PATH
   - bash .travis/setup.sh
 
 script:
