@@ -1,10 +1,13 @@
-sudo: required
+os: linux
+language: python
+python:
+  - "3.8"
 
 services:
   - docker
 
 install:
-  - pip install awscli
+  - pip install --upgrade --user awscli
 
 before_script:
   - export PATH=$PATH:$HOME/.local/bin
