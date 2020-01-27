@@ -7,4 +7,6 @@ services:
     volumes:
       - /app/node_modules
       - .:/app
+    environment:
+      - CI=true
     command: ["npm", "run", "test", "--watchAll", "--coverage"]
