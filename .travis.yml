@@ -1,22 +1,24 @@
 sudo: required
+
 services:
   - docker
 
-before_install:
-  - docker build -t chandanchaudhary/docker-react -f Dockerfile.dev .
+install:
+  - pip install awscli
+
+before_script:
+  - export PATH=$PATH:$HOME/.local/bin
+  - bash .travis/setup.sh
 
 script:
-  - docker run chandanchaudhary/docker-react npm run test -- --coverage
+  - docker-compose -f docker-compose.test.yml up
+
+after_success:
+  - bash .travis/pull.sh
+  - bash .travis/build.sh
 
 deploy:
-  provider: elasticbeanstalk
-  region: "us-east-1"
-  app: "docker-react"
-  env: "DockerReact-env"
-  bucket_name: "elasticbeanstalk-us-east-1-105209514119"
-  bucket_path: "docker-react"
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+  - provider: script
+    script: bash .travis/push.sh
+    on:
+      branch: master
