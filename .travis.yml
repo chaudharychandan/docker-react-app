@@ -1,10 +1,9 @@
 os: linux
 language: python
-python:
-  - "3.8"
-
 virtualenv:
   system_site_packages: true
+python:
+  - "3.8"
 
 services:
   - docker
@@ -13,7 +12,7 @@ install:
   - pip install --upgrade --user awscli
 
 before_script:
-  - export PATH=$PATH:$HOME/.local/bin
+  - export PATH=/usr/bin:$PATH
   - bash .travis/setup.sh
 
 script:
