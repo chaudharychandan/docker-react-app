@@ -4,9 +4,9 @@ pipeline {
       image 'node:10-alpine'
       label 'docker'
     }
-    environment {
-      CI = 'true'
-    }
+  }
+  environment {
+    CI = 'true'
   }
   stages {
     stage('Test') {
