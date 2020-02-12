@@ -1,7 +1,5 @@
 pipeline {
-  agent {
-    label 'docker'
-  }
+  agent any
   environment {
     CI = 'true'
   }
@@ -20,7 +18,6 @@ pipeline {
         stage('Test') {
           agent {
             docker {
-              label  'docker'
               image 'node:10-alpine'
               args '--name docker-node'
             }
@@ -32,7 +29,6 @@ pipeline {
         stage('Build') {
           agent {
             docker {
-              label  'docker'
               image 'node:10-alpine'
               args '--name docker-node'
             }
