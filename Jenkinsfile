@@ -10,9 +10,12 @@ pipeline {
   stages {
     stage('Start') {
       when {
-        changeRequest target: 'master', branch: 'feature-.*', comparator: 'REGEXP', caseSensitive: false
+        changeRequest target: 'master'
+        branch: 'feature-.*'
+        comparator: 'REGEXP'
+        caseSensitive: false
       }
-      steps {
+      stages {
         stage('Setup') {
           steps {
             sh './jenkins/setup.sh'
