@@ -7,13 +7,6 @@ pipeline {
   }
   stages {
     stage('Start') {
-      agent {
-        docker {
-          label  'docker'
-          image 'node:10-alpine'
-          args '--name docker-node'
-        }
-      }
       when {
         changeRequest target: 'master'
         branch pattern: "feature-.*", comparator: "REGEXP"
@@ -25,11 +18,25 @@ pipeline {
           }
         }
         stage('Test') {
+          agent {
+            docker {
+              label  'docker'
+              image 'node:10-alpine'
+              args '--name docker-node'
+            }
+          }
           steps {
             sh 'docker-compose -f docker-compose.test.yml up'
           }
         }
         stage('Build') {
+          agent {
+            docker {
+              label  'docker'
+              image 'node:10-alpine'
+              args '--name docker-node'
+            }
+          }
           steps {
             sh './jenkins/pull.sh'
             sh './jenkins/build.sh'
