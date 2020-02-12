@@ -1,4 +1,4 @@
-# Docker React App with Jenkins CI pipeline to AWS ECR
+# Deploy docker container react app with Jenkins CI pipeline to AWS ECR
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
