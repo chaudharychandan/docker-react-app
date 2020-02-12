@@ -29,6 +29,24 @@ pipeline {
             sh 'docker-compose -f docker-compose.test.yml up'
           }
         }
+        stage('Build') {
+          agent {
+            docker {
+              label  'docker'
+              image 'node:10-alpine'
+              args '--name docker-node'
+            }
+          }
+          steps {
+            sh './jenkins/pull.sh'
+            sh './jenkins/build.sh'
+          }
+        }
+        stage('Deliver') {
+          steps {
+            sh './jenkins/push.sh'
+          }
+        }
       }
     }
   }
