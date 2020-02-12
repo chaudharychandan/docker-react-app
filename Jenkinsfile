@@ -1,14 +1,19 @@
 pipeline {
   agent {
-    docker {
-      image 'node:10-alpine'
-    }
+    label 'docker'
   }
   environment {
     CI = 'true'
   }
   stages {
     stage('Start') {
+      agent {
+        docker {
+          label  'docker'
+          image 'node:10-alpine'
+          args '--name docker-node'
+        }
+      }
       when {
         changeRequest target: 'master'
         branch pattern: "feature-.*", comparator: "REGEXP"
