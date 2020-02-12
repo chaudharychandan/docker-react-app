@@ -11,11 +11,11 @@ pipeline {
       stages {
         stage('Installation') {
           steps {
-            pyenv global 3.7.1
-            pip install -U pip
-            pip install awscli
-            chmod -R 777 jenkins
-            export PATH=$HOME/.local/bin:$PATH
+            sh 'pyenv global 3.7.1'
+            sh 'pip install -U pip'
+            sh 'pip install awscli'
+            sh 'chmod -R 777 jenkins'
+            sh "export PATH=$HOME/.local/bin:$PATH"
           }
         }
         stage('Setup') {
