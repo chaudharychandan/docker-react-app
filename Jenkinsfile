@@ -11,7 +11,7 @@ pipeline {
     stage('Start') {
       when {
         changeRequest target: 'master'
-        branch: 'feature-.*', comparator: 'REGEXP', caseSensitive: false
+        branch pattern: "feature-.*", comparator: "REGEXP", caseSensitive: false
       }
       stages {
         stage('Setup') {
