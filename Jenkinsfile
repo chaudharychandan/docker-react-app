@@ -10,6 +10,12 @@ pipeline {
       }
       stages {
         stage('Setup') {
+          agent {
+            docker {
+              image 'node:10-alpine'
+              args '--name docker-node'
+            }
+          }
           steps {
             sh './jenkins/setup.sh'
           }
