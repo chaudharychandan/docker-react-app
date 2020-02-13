@@ -9,6 +9,10 @@ pipeline {
         changeRequest target: 'master'
       }
       stages {
+        stage('Initailize') {
+          def dockerHome = tool 'jenkins-docker'
+          env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
         stage('Setup') {
           agent {
             docker {
