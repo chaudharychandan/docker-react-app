@@ -9,15 +9,6 @@ pipeline {
         changeRequest target: 'master'
       }
       stages {
-        stage('Installation') {
-          steps {
-            sh 'pyenv global 3.7.1'
-            sh 'pip install -U pip'
-            sh 'pip install awscli'
-            sh 'chmod -R 777 jenkins'
-            sh "export PATH=$HOME/.local/bin:$PATH"
-          }
-        }
         stage('Setup') {
           steps {
             sh './jenkins/setup.sh'
